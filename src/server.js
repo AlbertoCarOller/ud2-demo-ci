@@ -58,3 +58,8 @@ app.get('/multiplicar', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor escuchando en el puerto ${PORT}`);
 });
+
+// Definimos una ruta "Home" (/)
+app.get('/mensaje', (req, res) => {
+  res.send('Esto es un mensaje de prueba');
+});
