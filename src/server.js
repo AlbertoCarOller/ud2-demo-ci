@@ -2,6 +2,7 @@
 const express = require('express');
 // Importamos nuestras funciones de la calculadora
 const { sumar, restar, multiplicar } = require('./calculadora');
+const morgan = require('morgan');
 
 // Creamos la aplicación de Express
 const app = express();
@@ -9,9 +10,15 @@ const app = express();
 // si no, usamos el 3000 para local.
 const PORT = process.env.PORT || 3000;
 
+app.use(morgan('combined'));
+
 // Definimos una ruta "Home" (/)
 app.get('/', (req, res) => {
   res.send('¡Hola Mundo! Este es nuestro servidor de calculadora.');
+});
+
+app.get('/health', (req, res) => {
+  res.json({ status: 'UP', timestamp: new Date(), uptime: process.uptime() });
 });
 
 // Definimos una ruta para sumar
